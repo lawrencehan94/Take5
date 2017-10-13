@@ -69,40 +69,40 @@ class DealsVC: UIViewController {
         deals.append(Deal("Demandware / Salesforce", 3031, 11.2, "June 2016"))
         deals.append(Deal("NetSuite / Oracle", 1300, 10.9, "July 2016"))
     }
-    
-    func getMonthName() {
-        for deal in deals {
-            deal.dateCode = deal.year*100 + deal.month*1
-            if deal.month == 1 {
-                deal.monthString = "January"
-            } else if deal.month == 2 {
-                deal.monthString = "February"
-            } else if deal.month == 3 {
-                deal.monthString = "March"
-            } else if deal.month == 4 {
-                deal.monthString = "April"
-            } else if deal.month == 5 {
-                deal.monthString = "May"
-            } else if deal.month == 6 {
-                deal.monthString = "June"
-            } else if deal.month == 7 {
-                deal.monthString = "July"
-            } else if deal.month == 8 {
-                deal.monthString = "August"
-            } else if deal.month == 9 {
-                deal.monthString = "September"
-            } else if deal.month == 10 {
-                deal.monthString = "October"
-            } else if deal.month == 11 {
-                deal.monthString = "November"
-            } else if deal.month == 12 {
-                deal.monthString = "December"
-            } else {
-                deal.monthString = " "
-            }
+
+	func getMonthName() {
+		for deal in deals {
+			deal.dateCode = deal.year*100 + deal.month*1
+			if deal.month == 1 {
+				deal.monthString = "January"
+			} else if deal.month == 2 {
+				deal.monthString = "February"
+			} else if deal.month == 3 {
+				deal.monthString = "March"
+			} else if deal.month == 4 {
+				deal.monthString = "April"
+			} else if deal.month == 5 {
+				deal.monthString = "May"
+			} else if deal.month == 6 {
+				deal.monthString = "June"
+			} else if deal.month == 7 {
+				deal.monthString = "July"
+			} else if deal.month == 8 {
+				deal.monthString = "August"
+			} else if deal.month == 9 {
+				deal.monthString = "September"
+			} else if deal.month == 10 {
+				deal.monthString = "October"
+			} else if deal.month == 11 {
+				deal.monthString = "November"
+			} else if deal.month == 12 {
+				deal.monthString = "December"
+			} else {
+				deal.monthString = " "
+			}
+		}
 	}
-}
-    
+	
     func calculateAverage() {
         for deal in deals {
             sum += deal.ltmEVRev
@@ -111,6 +111,33 @@ class DealsVC: UIViewController {
         average = sum / dealCount
         meanLabel.text = String(format: "Average Multiple: %.1fx", average)
     }
+	
+	@IBAction func sortByDate(_ sender: UIButton) {
+		deals.sort {$0.dateCode > $1.dateCode}
+		tableView.reloadData()
+	}
+	
+	@IBAction func ascendingSortValue(_ sender: UIButton) {
+		deals.sort {$0.ltmEVRev > $1.ltmEVRev}
+		tableView.reloadData()
+	}
+	
+	@IBAction func descendingSortValue(_ sender: UIButton) {
+		deals.sort {$0.ltmEVRev < $1.ltmEVRev}
+		tableView.reloadData()
+	}
+	
+	
+	@IBAction func descendingSortEV(_ sender: UIButton) {
+		deals.sort {$0.ev < $1.ev}
+		tableView.reloadData()
+	}
+	
+	
+	@IBAction func descendingSortEV(_ sender: UIButton) {
+		deals.sort {$0.ev < $1.ev}
+		tableView.reloadData()
+	}
    
 }
 
