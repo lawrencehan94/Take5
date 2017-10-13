@@ -12,13 +12,15 @@ class Deal {
     var name: String
     var ev: Double
     var ltmEVRev: Double
-    var date: String
+    var month: String
+    var year: Int
     
-    init(_ nameInput: String, _ evInput: Double, _ ltmEVRevInput: Double, _ dateInput: String) {
+    init(_ nameInput: String, _ evInput: Double, _ ltmEVRevInput: Double, _ monthInput: String, _ yearInput: Int) {
         name = nameInput
         ev = evInput
         ltmEVRev = ltmEVRevInput
-        date = dateInput
+        month = monthInput
+        year = yearInput
     }
 }
 
@@ -30,7 +32,7 @@ class DealCell: UITableViewCell {
     
     func configureCell(deal: Deal) {
         dealLabel.text = deal.name
-        bottomLabel.text = "$\(deal.ev)MM (\(deal.date))"
+        bottomLabel.text = "$\(deal.ev)MM (\(deal.month) \(deal.year))"
         valueLabel.text = String(format: "%.1fx", deal.ltmEVRev)
     }
     
