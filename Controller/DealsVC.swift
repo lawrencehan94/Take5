@@ -12,10 +12,12 @@ class Deal {
     var name: String
     var ev: Double
     var ltmEVRev: Double
-    var month: String
+    var month: Int
+	var monthString: String = " "
     var year: Int
+	var dateCode: Int = 0
     
-    init(_ nameInput: String, _ evInput: Double, _ ltmEVRevInput: Double, _ monthInput: String, _ yearInput: Int) {
+    init(_ nameInput: String, _ evInput: Double, _ 	ltmEVRevInput: Double, _ monthInput: Int, _ yearInput: Int) {
         name = nameInput
         ev = evInput
         ltmEVRev = ltmEVRevInput
@@ -32,7 +34,7 @@ class DealCell: UITableViewCell {
     
     func configureCell(deal: Deal) {
         dealLabel.text = deal.name
-        bottomLabel.text = "$\(deal.ev)MM (\(deal.month) \(deal.year))"
+        bottomLabel.text = "$\(deal.ev)MM (\(deal.monthString) \(deal.year))"
         valueLabel.text = String(format: "%.1fx", deal.ltmEVRev)
     }
     
@@ -51,6 +53,7 @@ class DealsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addSoftwareDeals()
+        getMonthName()
         deals.sort { $0.ltmEVRev > $1.ltmEVRev }
         tableView.delegate = self
         tableView.dataSource = self
@@ -66,6 +69,39 @@ class DealsVC: UIViewController {
         deals.append(Deal("Demandware / Salesforce", 3031, 11.2, "June 2016"))
         deals.append(Deal("NetSuite / Oracle", 1300, 10.9, "July 2016"))
     }
+    
+    func getMonthName() {
+        for deal in deals {
+            deal.dateCode = deal.year*100 + deal.month*1
+            if deal.month == 1 {
+                deal.monthString = "January"
+            } else if deal.month == 2 {
+                deal.monthString = "February"
+            } else if deal.month == 3 {
+                deal.monthString = "March"
+            } else if deal.month == 4 {
+                deal.monthString = "April"
+            } else if deal.month == 5 {
+                deal.monthString = "May"
+            } else if deal.month == 6 {
+                deal.monthString = "June"
+            } else if deal.month == 7 {
+                deal.monthString = "July"
+            } else if deal.month == 8 {
+                deal.monthString = "August"
+            } else if deal.month == 9 {
+                deal.monthString = "September"
+            } else if deal.month == 10 {
+                deal.monthString = "October"
+            } else if deal.month == 11 {
+                deal.monthString = "November"
+            } else if deal.month == 12 {
+                deal.monthString = "December"
+            } else {
+                deal.monthString = " "
+            }
+	}
+}
     
     func calculateAverage() {
         for deal in deals {
