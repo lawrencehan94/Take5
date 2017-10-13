@@ -1,15 +1,15 @@
 import UIKit
 
 class Company {
-var ticker: String
-var name: String
-var value: Double
+	var ticker: String
+	var name: String
+	var value: Double
 	
-init(_ tickerInput: String, _ nameInput: String, _ valueInput: Double) {
-ticker = tickerInput
-name = nameInput
-value = valueInput
-}
+	init(_ tickerInput: String, _ nameInput: String, _ valueInput: Double) {
+		ticker = tickerInput
+		name = nameInput
+		value = valueInput
+	}
 }
 
 class CompanyCell: UITableViewCell {
