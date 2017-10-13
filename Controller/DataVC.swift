@@ -21,7 +21,42 @@ class CompanyCell: UITableViewCell {
   func configureCell(company: Company) {
     tickerLabel.text = company.ticker
     companyLabel.text = company.name
-    valueLabel.text = company.value
+    valueLabel.text = String(format: "%.1fx", company.value)
   }
+}
 
+class CompaniesVC: UIViewController {
+	
+	@IBOutlet weak var tableView: UITableView!
+	@IBOutlet weak var averageLabel: UILabel!
+	
+	var companies = [Company]()
+	var sum = 0.0
+	var average = 0.0
+	var companyCount = 0.0
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		
+		companies.sort { $0.value > $1.value }
+		addCompanies()		
+		tableView.delegate = self
+    tableView.dataSource = self
+    tableView.reloadData()
+		calculateAverage()
+	}
+	
+	func addCompanies() {
+	
+	}
+	
+	func calculateAverage() {
+        for company in companies {
+            sum += company.value
+            companyCount += 1
+        }
+        average = sum / companyCount
+        averageLabel.text = String(format: "Average Multiple: %.1fx", average)
+    }
+	
 }
