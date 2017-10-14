@@ -205,19 +205,20 @@ func findThirtyDayPremiumDeals() {
 	chosenDeals = deals.filter { $0.thirtyDayPremium != 0}
 }
 
+let rangeLow: Double = 700.0
+let rangeHigh: Double = 1000.0
+
+func addLowAndHighRange(){
+	chosenDeals = deals.filter { rangeLow..<rangeHigh ~= $0.ev}
+}
 
 findOneDayPremiumDeals()
-
 getMonthName()
+addLowAndHighRange()
 
 deals.sort {$0.dateCode > $1.dateCode}
 
-for deal in deals {
-	print("\(deal.monthString) \(deal.year)")	
-}
-
-print(" ")
 
 for deal in chosenDeals {
-	print("\(deal.monthString) \(deal.year)")	
+	print("\(deal.ev)")	
 }
